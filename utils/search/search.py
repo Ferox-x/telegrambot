@@ -28,8 +28,8 @@ def hotel_info_print(hotel_info: dict, message: Message) -> str:
     name: str = hotel_info.get('name', 'Имя отеля не найдено')
     hotel_url = 'www.hotels.com/ho{id}'.format(id=hotel_info.get('id'))
     try:
-        address: str = hotel_info.get('address').get('streetAddress')
-        postal_code: str = hotel_info.get('address').get('postalCode')
+        address: str = hotel_info.get('address').get('streetAddress', 'Андрес не найден')
+        postal_code: str = hotel_info.get('address').get('postalCode', 'Индекс не найден')
     except AttributeError:
         address = 'Андрес не найден'
         postal_code = 'Индекс не найден'

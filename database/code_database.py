@@ -24,11 +24,11 @@ class BaseModel(Model):
 class User(BaseModel):
     """Класс с информацией о полях таблицы"""
     telegram_id: IntegerField = IntegerField(column_name='telegram_id',
-                                             unique=True, null=False)
-    user_name: CharField = CharField(column_name='user_name', null=False)
-    hotels_in_city: JSONField = JSONField(column_name='hotels_in_city')
-    parent_id: IntegerField = IntegerField(column_name='parent_id')
-    date: DateField = DateField(column_name='date')
+                                             unique=True, null=True)
+    user_name: CharField = CharField(column_name='user_name', null=True)
+    hotels_in_city: JSONField = JSONField(column_name='hotels_in_city', null=True)
+    parent_id: IntegerField = IntegerField(column_name='parent_id', null=True)
+    date: DateField = DateField(column_name='date', null=True)
 
 
 @logger.catch()
