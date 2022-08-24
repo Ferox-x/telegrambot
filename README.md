@@ -19,6 +19,6 @@
 
 `pip install -r requirements.txt`
 
-7) Запустить бота с помощью команды:
+4) Запустить бота с помощью команды:
 
 `python main.py`
