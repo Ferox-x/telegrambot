@@ -99,20 +99,23 @@ def find_destination_id(info_destination_id: str, message: Message):
         destination_ids = list()
 
         if response_city.status_code == codes.ok:
-            if find.group() != '"entities":[]':
-                data_city = loads(f"{{{find[0]}}}")
+            try:
+                if find.group() != '"entities":[]':
+                    data_city = loads(f"{{{find[0]}}}")
 
-                for index in data_city['entities']:
-                    destination_id: str = index['destinationId']
-                    caption: str = index['caption']
-                    city_clear: str = sub(pattern=r'<[^>]+>',
-                                          repl='', string=caption, count=0)
-                    destination_ids.append({'destination_id': destination_id,
-                                            'city_name': city_clear})
+                    for index in data_city['entities']:
+                        destination_id: str = index['destinationId']
+                        caption: str = index['caption']
+                        city_clear: str = sub(pattern=r'<[^>]+>',
+                                              repl='', string=caption, count=0)
+                        destination_ids.append({'destination_id': destination_id,
+                                                'city_name': city_clear})
 
-                city(message, destination_ids)
-            else:
-                tg_user.city_not_found = True
+                    city(message, destination_ids)
+                else:
+                    tg_user.city_not_found = True
+            except AttributeError:
+                bot.send_message(message.chat.id, 'Ошибка при поиске, повторите позже.')
 
 
 @logger.catch()
