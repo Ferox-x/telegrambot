@@ -1,0 +1,5 @@
+.env.template
+README.md
+/venv
+/.idea
+__pycache__
